@@ -61,7 +61,7 @@
         ],
         "test": "php ./bin/phpunit",
         "cover": "php ./bin/phpunit --coverage-clover ./var/phpunit/clover.xml ./tests",
-        "coveralls": "php ./vendor/bin/coveralls -v --exclude-no-stmt"
+        "coveralls": "php ./vendor/bin/php-coveralls -v"
     },
     "conflict": {
         "symfony/symfony": "*"
