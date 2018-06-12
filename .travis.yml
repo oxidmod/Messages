@@ -5,7 +5,7 @@ language: php
 php: [7.1]
 
 before_script:
-  - composer.phar install
+  - composer install
   - mkdir -p ./var
 
 script:
