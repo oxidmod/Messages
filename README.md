@@ -7,7 +7,7 @@ Test task for SMSEdge.io
 
 **How to install**
 
-1. git clone git@github.com:oxidmod/Messages.git
+1. git clone https://github.com/oxidmod/Messages.git
 2. cd Messages
 3. php composer.phar install
 4. Set DATABASE_URL in generated .env file in the project root
