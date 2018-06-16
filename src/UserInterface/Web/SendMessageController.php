@@ -36,13 +36,11 @@ class SendMessageController extends Controller
 
     /**
      * @Route(
-     *     "/users/{userId}/message",
-     *     requirements={"userId" = "\d+"},
+     *     "/message",
      *     name="send_message",
      *     methods={"POST"}
      * )
      *
-     * @param int     $userId
      * @param Request $request
      *
      * @return Response
@@ -50,10 +48,10 @@ class SendMessageController extends Controller
      * @throws ServiceUnavailableHttpException
      * @throws NotFoundHttpException
      */
-    public function __invoke(int $userId, Request $request): Response
+    public function __invoke(Request $request): Response
     {
         $command = new SendMessageCommand(
-            $userId,
+            $request->request->getInt('userId'),
             $request->request->getInt('numberId'),
             $request->request->get('message')
         );
@@ -66,8 +64,6 @@ class SendMessageController extends Controller
             throw new ServiceUnavailableHttpException(null, $exception->getMessage(), $exception);
         }
 
-        return $this->json([
-            'message' => 'Message was successfuly sent.',
-        ]);
+        return $this->redirectToRoute('index');
     }
 }
