@@ -11,6 +11,7 @@ use Oxidmod\Messages\Repository\Exception\NumberNotFoundException;
 use Oxidmod\Messages\Repository\Exception\UserNotFoundException;
 use Oxidmod\Messages\Repository\NumberRepository;
 use Oxidmod\Messages\Repository\UserRepository;
+use Oxidmod\Messages\Service\MessageGateway\Exception\SendMessageException;
 use Oxidmod\Messages\Service\MessageGateway\GatewayInterface;
 use Oxidmod\Messages\Service\MessageGateway\Message;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -63,14 +64,13 @@ class SendMessageHandler implements HandlerInterface
      *
      * @throws UserNotFoundException
      * @throws NumberNotFoundException
-     * @throws \Exception
      */
     public function handle(SendMessageCommand $command): void
     {
-        try {
-            $this->checkIfUserExists($command->getUserId());
-            $number = $this->getNumber($command->getNumberId());
+        $this->checkIfUserExists($command->getUserId());
+        $number = $this->getNumber($command->getNumberId());
 
+        try {
             $this->messageGateway->send(
                 new Message($number, $command->getMessage())
             );
@@ -79,13 +79,11 @@ class SendMessageHandler implements HandlerInterface
                 MessageSentEvent::EVENT_NAME,
                 new MessageSentEvent($command->getUserId(), $command->getNumberId(), $command->getMessage())
             );
-        } catch (\Exception $exception) {
+        } catch (SendMessageException $exception) {
             $this->eventDispatcher->dispatch(
                 MessageNotSentEvent::EVENT_NAME,
                 new MessageNotSentEvent($command->getUserId(), $command->getNumberId(), $command->getMessage())
             );
-
-            throw $exception;
         }
     }
 

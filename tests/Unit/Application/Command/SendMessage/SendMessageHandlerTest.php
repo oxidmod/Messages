@@ -91,9 +91,8 @@ class SendMessageHandlerTest extends TestCase
             ->with(self::USER_ID)
             ->willThrowException(new UserNotFoundException(self::USER_ID));
 
-        $this->eventDispatcher->expects(static::once())
-            ->method('dispatch')
-            ->with(MessageNotSentEvent::EVENT_NAME, new MessageNotSentEvent(self::USER_ID, self::NUMBER_ID, self::MESSAGE));
+        $this->eventDispatcher->expects(static::never())->method(static::anything());
+        $this->messageGateway->expects(static::never())->method(static::anything());
 
         $this->expectException(UserNotFoundException::class);
 
@@ -112,17 +111,12 @@ class SendMessageHandlerTest extends TestCase
         $this->numbersRepo->expects(static::once())
             ->method('find')
             ->with(self::NUMBER_ID)
-            ->willReturn(new Number($this->createMock(Country::class), self::NUMBER));
+            ->willThrowException(new NumberNotFoundException(self::NUMBER_ID));
 
-        $this->messageGateway->expects(static::once())
-            ->method('send')
-            ->willThrowException(new SendMessageException());
+        $this->eventDispatcher->expects(static::never())->method(static::anything());
+        $this->messageGateway->expects(static::never())->method(static::anything());
 
-        $this->eventDispatcher->expects(static::once())
-            ->method('dispatch')
-            ->with(MessageNotSentEvent::EVENT_NAME, new MessageNotSentEvent(self::USER_ID, self::NUMBER_ID, self::MESSAGE));
-
-        $this->expectException(SendMessageException::class);
+        $this->expectException(NumberNotFoundException::class);
 
         $this->handler->handle($command);
     }
@@ -139,13 +133,16 @@ class SendMessageHandlerTest extends TestCase
         $this->numbersRepo->expects(static::once())
             ->method('find')
             ->with(self::NUMBER_ID)
-            ->willThrowException(new NumberNotFoundException(self::NUMBER_ID));
+            ->willReturn(new Number($this->createMock(Country::class), self::NUMBER));
+
+        $this->messageGateway->expects(static::once())
+            ->method('send')
+            ->with(new Message(self::NUMBER, self::MESSAGE))
+            ->willThrowException(new SendMessageException());
 
         $this->eventDispatcher->expects(static::once())
             ->method('dispatch')
             ->with(MessageNotSentEvent::EVENT_NAME, new MessageNotSentEvent(self::USER_ID, self::NUMBER_ID, self::MESSAGE));
-
-        $this->expectException(NumberNotFoundException::class);
 
         $this->handler->handle($command);
     }
