@@ -30,19 +30,23 @@ class AggregatedLogQuery
     private $countryId;
 
     /**
-     * @param \DateTimeImmutable $from
-     * @param \DateTimeImmutable $to
-     * @param int|null           $userId
-     * @param int|null           $countryId
+     * @param string   $from
+     * @param string   $to
+     * @param int|null $userId
+     * @param int|null $countryId
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(
-        \DateTimeImmutable $from,
-        \DateTimeImmutable $to,
+        string $from,
+        string $to,
         ? int $userId,
         ? int $countryId
     ) {
-        $this->from = $from;
-        $this->to = $to;
+        $this->setFrom($from);
+        $this->setTo($to);
+        $this->validateDates();
+
         $this->userId = $userId;
         $this->countryId = $countryId;
     }
@@ -58,7 +62,7 @@ class AggregatedLogQuery
     /**
      * @return \DateTimeImmutable
      */
-    public function getTo(): \DateTimeImmutable
+    public function getTo() : \DateTimeImmutable
     {
         return $this->to;
     }
@@ -93,5 +97,51 @@ class AggregatedLogQuery
     public function getCountryId(): int
     {
         return $this->countryId;
+    }
+
+    /**
+     * @param string $from
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function setFrom(string $from): void
+    {
+        $date = \DateTimeImmutable::createFromFormat('Y-m-d', $from);
+
+        if (false === $date) {
+            throw new \InvalidArgumentException(
+                \sprintf('DateFrom "%s" is invalid.', $from)
+            );
+        }
+
+        $this->from = $date->setTime(0, 0);
+    }
+
+    /**
+     * @param string $to
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function setTo(string $to): void
+    {
+        $date = \DateTimeImmutable::createFromFormat('Y-m-d', $to);
+
+        if (false === $date) {
+            throw new \InvalidArgumentException(
+                \sprintf('DateTo "%s" is invalid.', $to)
+            );
+        }
+
+        $this->to = $date->setTime(0, 0);
+    }
+
+    /**
+     * @throws \InvalidArgumentException
+     */
+    private function validateDates(): void
+    {
+        if ($this->to < $this->from) {
+            throw new \InvalidArgumentException('DateFrom can\'t be greater then DateTo.');
+        }
     }
 }
