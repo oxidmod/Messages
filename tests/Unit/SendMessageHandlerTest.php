@@ -15,6 +15,7 @@ use Oxidmod\Messages\Repository\Exception\NumberNotFoundException;
 use Oxidmod\Messages\Repository\Exception\UserNotFoundException;
 use Oxidmod\Messages\Repository\NumberRepository;
 use Oxidmod\Messages\Repository\UserRepository;
+use Oxidmod\Messages\Service\MessageGateway\Exception\SendMessageException;
 use Oxidmod\Messages\Service\MessageGateway\GatewayInterface;
 use Oxidmod\Messages\Service\MessageGateway\Message;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -114,13 +115,13 @@ class SendMessageHandlerTest extends TestCase
 
         $this->messageGateway->expects(static::once())
             ->method('send')
-            ->willThrowException(new \Exception());
+            ->willThrowException(new SendMessageException());
 
         $this->eventDispatcher->expects(static::once())
             ->method('dispatch')
             ->with(MessageNotSentEvent::EVENT_NAME, new MessageNotSentEvent(self::USER_ID, self::NUMBER_ID, self::MESSAGE));
 
-        $this->expectException(\Exception::class);
+        $this->expectException(SendMessageException::class);
 
         $this->handler->handle($command);
     }
