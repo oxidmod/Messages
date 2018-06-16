@@ -2,7 +2,7 @@
 
 declare (strict_types=1);
 
-namespace Oxidmod\Messages\Command\AggregateLog;
+namespace Oxidmod\Messages\Application\Command\AggregateLog;
 
 /**
  * Application command to aggregate send log

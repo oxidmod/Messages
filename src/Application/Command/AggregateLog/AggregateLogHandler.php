@@ -2,10 +2,10 @@
 
 declare (strict_types=1);
 
-namespace Oxidmod\Messages\Command\AggregateLog;
+namespace Oxidmod\Messages\Application\Command\AggregateLog;
 
 use Doctrine\DBAL\Driver\Connection;
-use Oxidmod\Messages\Command\HandlerInterface;
+use Oxidmod\Messages\Application\HandlerInterface;
 use Psr\Log\LoggerInterface;
 
 /**

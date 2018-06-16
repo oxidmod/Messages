@@ -4,8 +4,9 @@ declare (strict_types=1);
 
 namespace Oxidmod\Messages\Tests\Unit\Command\SendMessage;
 
-use Oxidmod\Messages\Command\SendMessage\SendMessageCommand;
-use Oxidmod\Messages\Command\SendMessage\SendMessageHandler;
+use Oxidmod\Messages\Application\Command\SendMessage\SendMessageCommand;
+use Oxidmod\Messages\Application\Command\SendMessage\SendMessageHandler;
+use Oxidmod\Messages\Application\HandlerInterface;
 use Oxidmod\Messages\Entity\Country;
 use Oxidmod\Messages\Entity\Number;
 use Oxidmod\Messages\Entity\User;
@@ -160,5 +161,13 @@ class SendMessageHandlerTest extends TestCase
         $this->eventDispatcher = $this->createMock(EventDispatcherInterface::class);
 
         $this->handler = new SendMessageHandler($this->userRepo, $this->numbersRepo, $this->messageGateway, $this->eventDispatcher);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function assertPreConditions()
+    {
+        static::assertInstanceOf(HandlerInterface::class, $this->handler);
     }
 }

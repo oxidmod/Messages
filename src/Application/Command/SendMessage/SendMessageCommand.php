@@ -2,7 +2,7 @@
 
 declare (strict_types=1);
 
-namespace Oxidmod\Messages\Command\SendMessage;
+namespace Oxidmod\Messages\Application\Command\SendMessage;
 
 /**
  * Application command to send message

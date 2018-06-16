@@ -1,6 +1,6 @@
 <?php
 
-namespace Oxidmod\Messages\Command;
+namespace Oxidmod\Messages\Application;
 
 /**
  * Marker interface for hadnler configuration

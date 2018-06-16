@@ -2,9 +2,9 @@
 
 declare (strict_types=1);
 
-namespace Oxidmod\Messages\Command\SendMessage;
+namespace Oxidmod\Messages\Application\Command\SendMessage;
 
-use Oxidmod\Messages\Command\HandlerInterface;
+use Oxidmod\Messages\Application\HandlerInterface;
 use Oxidmod\Messages\Event\MessageNotSentEvent;
 use Oxidmod\Messages\Event\MessageSentEvent;
 use Oxidmod\Messages\Repository\Exception\NumberNotFoundException;
