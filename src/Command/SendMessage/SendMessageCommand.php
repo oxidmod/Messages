@@ -2,17 +2,13 @@
 
 declare (strict_types=1);
 
-namespace Oxidmod\Messages\Event;
-
-use Symfony\Component\EventDispatcher\Event;
+namespace Oxidmod\Messages\Command\SendMessage;
 
 /**
- * This event is triggered on message sending fail
+ * Application command to send message
  */
-class MessageNotSentEvent extends Event
+class SendMessageCommand
 {
-    public const EVENT_NAME = 'messages.event_not_sent';
-
     /**
      * @var int
      */
