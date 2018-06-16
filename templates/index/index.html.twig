@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form method="post" action="{{ path('send_message') }}">
+        <fieldset>
+            <legend>Send a new Message</legend>
+            <div>
+                <label>User</label>
+            </div>
+            <div>
+                <select name="userId">
+                    {% for user in users %}
+                        <option value="{{ user.getId() }}">{{ user.getName() }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label>Number</label>
+            </div>
+            <div>
+                <select name="numberId">
+                    {% for number in numbers %}
+                        <option value="{{ number.getId() }}">{{ number.getNumber() }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label>Message</label>
+            </div>
+            <div>
+                <textarea name="message"></textarea>
+            </div>
+            <div>
+                <input type="submit" value="Send" />
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}
