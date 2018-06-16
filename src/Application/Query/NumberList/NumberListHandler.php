@@ -33,8 +33,9 @@ class NumberListHandler implements HandlerInterface
      */
     public function handle(NumberListQuery $query): array
     {
-        return $this->em->createQueryBuilder('n')
-            ->select(Number::class, 'n')
+        return $this->em->createQueryBuilder()
+            ->select('n')
+            ->from(Number::class, 'n')
             ->getQuery()
             ->execute();
     }
