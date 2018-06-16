@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oxidmod\Messages\Repository;
 
 use Oxidmod\Messages\Entity\Number;
