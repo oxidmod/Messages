@@ -29,7 +29,7 @@ class SendMessageController extends Controller
     /**
      * @Route(
      *     "/users/{userId}/message",
-     *     requirements={"userId" = "\d+"}
+     *     requirements={"userId" = "\d+"},
      *     name="send_message",
      *     methods={"POST"}
      * )
