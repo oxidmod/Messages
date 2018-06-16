@@ -2,7 +2,7 @@
 
 declare (strict_types=1);
 
-namespace Oxidmod\Messages\Controller;
+namespace Oxidmod\Messages\UserInterface\Web;
 
 use League\Tactician\CommandBus;
 use Oxidmod\Messages\Command\SendMessage\SendMessageCommand;
