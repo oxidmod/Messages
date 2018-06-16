@@ -1,23 +1,46 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
 
 namespace Oxidmod\Messages\Repository;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Oxidmod\Messages\Entity\Number;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Oxidmod\Messages\Repository\Exception\NumberNotFoundException;
 
 /**
- * @method Number|null find(int $id, int $lockMode = null, int $lockVersion = null)
- * @method Number|null findOneBy(array $criteria, array $orderBy = null)
- * @method Number[]    findAll()
- * @method Number[]    findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null)
+ * Repository for Number entity
  */
-class NumberRepository extends ServiceEntityRepository
+class NumberRepository
 {
-    public function __construct(RegistryInterface $registry)
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    /**
+     * @param EntityManagerInterface $em
+     */
+    public function __construct(EntityManagerInterface $em)
     {
-        parent::__construct($registry, Number::class);
+        $this->em = $em;
+    }
+
+    /**
+     * @param int $numberId
+     *
+     * @return Number
+     *
+     * @throws NumberNotFoundException
+     */
+    public function find(int $numberId): Number
+    {
+        $entity = $this->em->find(Number::class, $numberId);
+
+        if ($entity instanceof Number) {
+            return $entity;
+        }
+
+        throw new NumberNotFoundException($numberId);
     }
 }

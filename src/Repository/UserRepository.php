@@ -1,23 +1,46 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
 
 namespace Oxidmod\Messages\Repository;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Oxidmod\Messages\Entity\User;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Oxidmod\Messages\Repository\Exception\UserNotFoundException;
 
 /**
- * @method User|null find(int $id, int $lockMode = null, int $lockVersion = null)
- * @method User|null findOneBy(array $criteria, array $orderBy = null)
- * @method User[]    findAll()
- * @method User[]    findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null)
+ * Repository for User entity
  */
-class UserRepository extends ServiceEntityRepository
+class UserRepository
 {
-    public function __construct(RegistryInterface $registry)
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    /**
+     * @param EntityManagerInterface $em
+     */
+    public function __construct(EntityManagerInterface $em)
     {
-        parent::__construct($registry, User::class);
+        $this->em = $em;
+    }
+
+    /**
+     * @param int $userId
+     *
+     * @return User
+     *
+     * @throws UserNotFoundException
+     */
+    public function find(int $userId): User
+    {
+        $entity = $this->em->find(User::class, $userId);
+
+        if ($entity instanceof User) {
+            return $entity;
+        }
+
+        throw new UserNotFoundException($userId);
     }
 }
