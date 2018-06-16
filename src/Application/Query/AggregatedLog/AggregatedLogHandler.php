@@ -67,7 +67,7 @@ class AggregatedLogHandler implements HandlerInterface
         }
 
         if ($query->hasCountryId()) {
-            $predicates->add($qb->expr()->eq('ctn_id', $query->getCountryId()));
+            $predicates->add($qb->expr()->eq('cnt_id', $query->getCountryId()));
         }
 
         if ($predicates->count() > 0) {

@@ -75,8 +75,8 @@ class LogController extends AbstractController
                 new AggregatedLogQuery(
                     $request->request->get('from', ''),
                     $request->request->get('to', ''),
-                    empty($request->request->get('userId')) ? null : $request->request->get('userId'),
-                    empty($request->request->get('countryId')) ? null : $request->request->get('countryId')
+                    empty($request->request->get('userId')) ? null : (int) $request->request->get('userId'),
+                    empty($request->request->get('countryId')) ? null : (int) $request->request->get('countryId')
                 )
             );
         }
