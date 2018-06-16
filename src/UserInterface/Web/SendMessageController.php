@@ -5,7 +5,7 @@ declare (strict_types=1);
 namespace Oxidmod\Messages\UserInterface\Web;
 
 use League\Tactician\CommandBus;
-use Oxidmod\Messages\Command\SendMessage\SendMessageCommand;
+use Oxidmod\Messages\Application\Command\SendMessage\SendMessageCommand;
 use Oxidmod\Messages\Repository\Exception\NumberNotFoundException;
 use Oxidmod\Messages\Repository\Exception\UserNotFoundException;
 use Oxidmod\Messages\Service\MessageGateway\Exception\SendMessageException;

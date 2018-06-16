@@ -5,7 +5,7 @@ declare (strict_types=1);
 namespace Oxidmod\Messages\UserInterface\Console;
 
 use League\Tactician\CommandBus;
-use Oxidmod\Messages\Command\AggregateLog\AggregateLogCommand;
+use Oxidmod\Messages\Application\Command\AggregateLog\AggregateLogCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
