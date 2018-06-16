@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form method="post" action="{{ path('get_logs') }}">
+        <fieldset>
+            <legend>Filter aggregated logs</legend>
+            <div>
+                <label>Date From</label>
+            </div>
+            <div>
+                <input name="from" type="date" required />
+            </div>
+            <div>
+                <label>Date To</label>
+            </div>
+            <div>
+                <input name="to" type="date" required />
+            </div>
+            <div>
+                <label>Country</label>
+            </div>
+            <div>
+                <select name="countryId">
+                    <option></option>
+                    {% for country in countries %}
+                        <option value="{{ country.getId() }}">{{ country.getTitle() }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label>User</label>
+            </div>
+            <div>
+                <select name="userId">
+                    <option></option>
+                    {% for user in users %}
+                        <option value="{{ user.getId() }}">{{ user.getName() }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <input type="submit" value="Search" />
+            </div>
+        </fieldset>
+    </form>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Successfully sent</th>
+            <th>Failed</th>
+        </tr>
+        {% for log in logs %}
+            <tr>
+                <td>{{ log.getDate()|date('Y-m-d') }}</td>
+                <td>{{ log.getSuccessNumber() }}</td>
+                <td>{{ log.getFailNumber() }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
