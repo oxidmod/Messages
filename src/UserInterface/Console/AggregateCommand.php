@@ -47,7 +47,7 @@ class AggregateCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $command = $input->hasOption('clear-log') ?
+        $command = $input->getParameterOption('--clear-log') !== false ?
             AggregateLogCommand::clearLog() :
             AggregateLogCommand::preserveLog();
 
