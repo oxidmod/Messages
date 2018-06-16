@@ -1,23 +1,36 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
 
 namespace Oxidmod\Messages\Repository;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Oxidmod\Messages\Entity\SendLog;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method SendLog|null find(int $id, int $lockMode = null, int $lockVersion = null)
- * @method SendLog|null findOneBy(array $criteria, array $orderBy = null)
- * @method SendLog[]    findAll()
- * @method SendLog[]    findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null)
+ * Repository for SendLog entity
  */
-class SendLogRepository extends ServiceEntityRepository
+class SendLogRepository
 {
-    public function __construct(RegistryInterface $registry)
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    /**
+     * @param EntityManagerInterface $em
+     */
+    public function __construct(EntityManagerInterface $em)
     {
-        parent::__construct($registry, SendLog::class);
+        $this->em = $em;
+    }
+
+    /**
+     * @param SendLog $log
+     */
+    public function save(SendLog $log): void
+    {
+        $this->em->persist($log);
+        $this->em->flush();
     }
 }

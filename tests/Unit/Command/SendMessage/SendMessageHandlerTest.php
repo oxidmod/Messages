@@ -2,7 +2,7 @@
 
 declare (strict_types=1);
 
-namespace Oxidmod\Messages\Tests\Unit;
+namespace Oxidmod\Messages\Tests\Unit\Command\SendMessage;
 
 use Oxidmod\Messages\Command\SendMessage\SendMessageCommand;
 use Oxidmod\Messages\Command\SendMessage\SendMessageHandler;
