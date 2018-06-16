@@ -2,7 +2,7 @@
 
 namespace Oxidmod\Messages;
 
-use Oxidmod\Messages\Command\HandlerInterface;
+use Oxidmod\Messages\Application\HandlerInterface;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
