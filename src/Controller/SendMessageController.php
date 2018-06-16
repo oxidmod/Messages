@@ -27,6 +27,14 @@ class SendMessageController extends Controller
     private $commandBus;
 
     /**
+     * @param CommandBus $commandBus
+     */
+    public function __construct(CommandBus $commandBus)
+    {
+        $this->commandBus = $commandBus;
+    }
+
+    /**
      * @Route(
      *     "/users/{userId}/message",
      *     requirements={"userId" = "\d+"},

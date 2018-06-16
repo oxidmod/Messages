@@ -4,6 +4,7 @@ declare (strict_types=1);
 
 namespace Oxidmod\Messages\Command\SendMessage;
 
+use Oxidmod\Messages\Command\HandlerInterface;
 use Oxidmod\Messages\Event\MessageNotSentEvent;
 use Oxidmod\Messages\Event\MessageSentEvent;
 use Oxidmod\Messages\Repository\Exception\NumberNotFoundException;
@@ -17,7 +18,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * Handler for SendMessageCommand
  */
-class SendMessageHandler
+class SendMessageHandler implements HandlerInterface
 {
     /**
      * @var UserRepository
