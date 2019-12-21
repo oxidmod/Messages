@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Oxidmod\Messages\Repository;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Oxidmod\Messages\Entity\Country;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @method Country|null find(int $id, int $lockMode = null, int $lockVersion = null)
@@ -16,7 +16,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class CountryRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Country::class);
     }
