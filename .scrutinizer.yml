@@ -7,4 +7,5 @@ tools:
 
 filter:
     excluded_paths:
-        - tests/*
+        - project/tests/*
+        - devops/*

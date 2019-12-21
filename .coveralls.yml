@@ -1,2 +1,2 @@
-coverage_clover: ./var/phpunit/clover.xml
-json_path: ./var/phpunit/coveralls-upload.json
+coverage_clover: ./project/var/phpunit/clover.xml
+json_path: ./project/var/phpunit/coveralls-upload.json
