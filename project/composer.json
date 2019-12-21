@@ -15,10 +15,8 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "league/tactician-bundle": "^1.1",
-        "symfony/console": "^4.1",
-        "symfony/flex": "^1.0",
+        "symfony/flex": "^1.6",
         "symfony/framework-bundle": "^4.1",
-        "symfony/lts": "^4@dev",
         "symfony/orm-pack": "^1.0",
         "symfony/twig-bundle": "^4.1",
         "symfony/yaml": "^4.1"
@@ -27,8 +25,7 @@
         "php-coveralls/php-coveralls": "^2.1",
         "symfony/dotenv": "^4.1",
         "symfony/maker-bundle": "^1.5",
-        "symfony/phpunit-bridge": "^4.1",
-        "symfony/web-server-bundle": "^4.1"
+        "symfony/phpunit-bridge": "^4.1"
     },
     "config": {
         "preferred-install": {
