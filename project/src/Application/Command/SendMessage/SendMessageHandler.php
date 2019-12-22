@@ -76,12 +76,10 @@ class SendMessageHandler implements HandlerInterface
             );
 
             $this->eventDispatcher->dispatch(
-                MessageSentEvent::EVENT_NAME,
                 new MessageSentEvent($command->getUserId(), $command->getNumberId(), $command->getMessage())
             );
         } catch (SendMessageException $exception) {
             $this->eventDispatcher->dispatch(
-                MessageNotSentEvent::EVENT_NAME,
                 new MessageNotSentEvent($command->getUserId(), $command->getNumberId(), $command->getMessage())
             );
         }

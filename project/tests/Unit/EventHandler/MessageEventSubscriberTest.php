@@ -48,10 +48,10 @@ class MessageEventSubscriberTest extends TestCase
     public function testGetSubscribedEvents(): void
     {
         static::assertEquals([
-            'messages.event_sent' => [
+            MessageSentEvent::class => [
                 ['onMessageSent', 0],
             ],
-            'messages.event_not_sent' => [
+            MessageNotSentEvent::class => [
                 ['onMessageNotSent', 0],
             ],
         ], MessageEventSubscriber::getSubscribedEvents());

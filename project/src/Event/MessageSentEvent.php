@@ -4,15 +4,13 @@ declare (strict_types=1);
 
 namespace Oxidmod\Messages\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * This event is triggered on success message sending
  */
 class MessageSentEvent extends Event
 {
-    public const EVENT_NAME = 'messages.event_sent';
-
     /**
      * @var int
      */

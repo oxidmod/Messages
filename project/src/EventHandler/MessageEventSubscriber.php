@@ -78,10 +78,10 @@ class MessageEventSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            MessageSentEvent::EVENT_NAME => [
+            MessageSentEvent::class => [
                 ['onMessageSent', 0],
             ],
-            MessageNotSentEvent::EVENT_NAME => [
+            MessageNotSentEvent::class => [
                 ['onMessageNotSent', 0],
             ],
         ];

@@ -77,7 +77,7 @@ class SendMessageHandlerTest extends TestCase
 
         $this->eventDispatcher->expects(static::once())
             ->method('dispatch')
-            ->with(MessageSentEvent::EVENT_NAME, new MessageSentEvent(self::USER_ID, self::NUMBER_ID, self::MESSAGE));
+            ->with(new MessageSentEvent(self::USER_ID, self::NUMBER_ID, self::MESSAGE));
 
         $this->handler->handle($command);
     }
@@ -142,7 +142,7 @@ class SendMessageHandlerTest extends TestCase
 
         $this->eventDispatcher->expects(static::once())
             ->method('dispatch')
-            ->with(MessageNotSentEvent::EVENT_NAME, new MessageNotSentEvent(self::USER_ID, self::NUMBER_ID, self::MESSAGE));
+            ->with(new MessageNotSentEvent(self::USER_ID, self::NUMBER_ID, self::MESSAGE));
 
         $this->handler->handle($command);
     }

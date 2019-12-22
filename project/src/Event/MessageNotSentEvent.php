@@ -4,15 +4,13 @@ declare (strict_types=1);
 
 namespace Oxidmod\Messages\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * This event is triggered on message sending fail
  */
 class MessageNotSentEvent extends Event
 {
-    public const EVENT_NAME = 'messages.event_not_sent';
-
     /**
      * @var int
      */
