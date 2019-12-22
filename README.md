@@ -9,9 +9,5 @@ Test task for SMSEdge.io
 
 1. git clone https://github.com/oxidmod/Messages.git
 2. cd Messages
-3. php composer.phar install
-4. Set DATABASE_URL in generated .env file in the project root
-5. php bin/console doctrine:database:create
-6. php bin/console doctrine:migration:migrate -n
-7. start server php bin/console server:start
-8. Open http://localhost:8000 in your browser
+3. sh devops/bin/local.sh
+4. Open http://localhost in your browser
